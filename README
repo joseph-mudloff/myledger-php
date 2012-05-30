@@ -5,3 +5,15 @@ It is currently in the development stage, without much functionality.
 It uses Justin Vincent's ezaql class for PostgreSQL, and the html_form PHP class from dyn-web.com.
 
 The app framework is based on a custom CMS that I put together for web applications. It should be pretty easy to follow the process flow by looking at the main index.php and config.php files. I'm trying to be mindful about adding comments to make it easier.
+
+This does NOT (yet, at least) create any SQL-Ledger datasets -- you must already have a working SQL-Ledger installation (or, at least, a PostgreSQL database [dataset] created with SQL-Ledger).
+
+You can use the .htaccess file if mod_rewrite is enabled. Otherwise, you'll have to use a query string for the scripts in the /modules directory:
+http://url-for-myledger-php/?script=coa (for the Chart Of Accounts)
+
+With mod_rewrite, you could call them up in either of these two forms:
+http://url-for-myledger-php/coa
+ or
+http://url-for-myledger-php/coa.html
+
+Right now, the coa.php file is the only one that returns results. The ic.php file is a first reproduction of the form to search items/parts, but doesn't yet return the results (report).
