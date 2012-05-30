@@ -1,19 +1,52 @@
 This is a PHP front-end for datasets created with SQL-Ledger.
 
-It is currently in the development stage, without much functionality.
+USE AT YOUR OWN RISK. IF YOU HOARK A PRODUCTION DATASET, YOUR CLIENT
+WILL SPANK YOU.
 
-It uses Justin Vincent's ezaql class for PostgreSQL, and the html_form PHP class from dyn-web.com.
+This is currently in the development stage, without much functionality.
 
-The app framework is based on a custom CMS that I put together for web applications. It should be pretty easy to follow the process flow by looking at the main index.php and config.php files. I'm trying to be mindful about adding comments to make it easier.
+It uses Justin Vincent's ez_sql class for PostgreSQL, and the html_form
+PHP class from dyn-web.com.
 
-This does NOT (yet, at least) create any SQL-Ledger datasets -- you must already have a working SQL-Ledger installation (or, at least, a PostgreSQL database [dataset] created with SQL-Ledger).
+The app framework is based on a custom CMS that I put together for web
+applications. It should be pretty easy to follow the process flow by
+looking at the main index.php and config.php files. I'm trying to be
+mindful about adding comments to make it easier.
 
-You can use the .htaccess file if mod_rewrite is enabled. Otherwise, you'll have to use a query string for the scripts in the /modules directory:
-http://url-for-myledger-php/?script=coa (for the Chart Of Accounts)
+To start out, I'm only using SELECT queries... mainly as a reporting
+tool, trying to make it more intuitive and user-friendly.
+
+I'm starting with the inventory module. I've used both SQL-Ledger and
+LedgerSMB for tracking inventory and parts distribution to job sites
+in the past, and it's a good tool. I've always wished it were easier
+to use, but went cross-eyed every time I tried to sift through the
+spaghetti bowl of code. And, several people have expressed a desire
+for a PHP version of SQL-Ledger. So, I'm hoping to make something
+that is fairly easy for other programmers to customize.
+
+This does NOT create any SQL-Ledger datasets -- you must
+already have a working SQL-Ledger installation (or, at least, a
+PostgreSQL database [dataset] created with SQL-Ledger).
+
+You can use the .htaccess file if mod_rewrite is enabled. Otherwise,
+you'll have to use a query string for the scripts in the /modules
+directory, as such:
+http://hostname/myledger-php_directory/?script=coa
+('coa' is the script for the Chart Of Accounts)
 
 With mod_rewrite, you could call them up in either of these two forms:
-http://url-for-myledger-php/coa
+http://hostname/myledger-php_directory/coa
  or
-http://url-for-myledger-php/coa.html
+http://hostname/myledger-php_directory/coa.html
 
-Right now, the coa.php file is the only one that returns results. The ic.php file is a first reproduction of the form to search items/parts, but doesn't yet return the results (report).
+Right now, the coa.php file is the only one that returns results. The
+ic.php file is a first reproduction of the form to search items/parts,
+but doesn't yet return the results (report).
+
+Also, note that you can name the home directory whatever you want. For
+example, I'm using:
+  /var/www/myledger
+So, the URL would be http://mydevserver/myledger
+
+Just make sure your httpd.conf file (if needed) specifies the correct
+directory.
